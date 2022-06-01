@@ -1,0 +1,51 @@
+Rank = []
+Name = []
+Team = []
+Goal = []
+
+import requests
+
+from bs4 import BeautifulSoup as bs
+req = requests.get("https://sports.news.naver.com/wfootball/record/index?category=epl&tab=player&year=2021")
+html = req.text
+soup = bs(html, "lxml")
+
+PContents = soup.select("#wfootballPlayerRecordBody > table > tbody > tr")
+
+for PContents in PContents :
+  PName = PContents.select_one("td.align_l > div > span.name").text
+  PTeam = PContents.select_one("td.align_l > div > span.team").text
+
+
+
+  Name.append(PName)
+  Team.append(PTeam)
+
+
+
+
+
+# import requests
+
+# from bs4 import BeautifulSoup as bs
+# req = requests.get("https://sports.news.naver.com/wfootball/record/index?category=epl&tab=player&year=2021")
+# html = req.text
+# soup = bs(html, "lxml")
+
+# PContents = soup.select("#wfootballPlayerRecordBody > table > tbody > tr")
+
+# for PContents in PContents :
+#   PRank = PContents.select_one("td.num > div > strong").text
+#   PGoal = PContents.select_one("td.selected > div > span").text
+
+#   Rank.append(PRank)
+#   Goal.append(PGoal)
+
+
+
+# IName = str(input())
+
+# a = Name.index(IName)
+
+# if IName in Name:
+#   print(f'{Team[a]}의 {Name[a]}선수는 {Goal[a]}골로 득점순위{Rank[a]}등 입니다.')
